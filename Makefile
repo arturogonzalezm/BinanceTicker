@@ -39,7 +39,7 @@ logs:
 # Shell into the PostgreSQL container
 db-shell:
 	@echo "Connecting to PostgreSQL database..."
-	docker exec -it $(PROJECT)_postgres psql -U ${DB_USER} -d ${DB_NAME}
+	docker exec -it $(PROJECT)_pgdata psql -U ${DB_USER} -d ${DB_NAME}
 
 # Build the C++ application
 cpp-build: $(BUILD_DIR)/$(PROJECT)
@@ -53,3 +53,7 @@ $(BUILD_DIR)/$(PROJECT):
 run: cpp-build
 	@echo "Running the C++ application..."
 	./$(BUILD_DIR)/$(PROJECT)
+
+# Clean build artifacts
+cpp-clean:
+	rm -rf $(BUILD_DIR)
